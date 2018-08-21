@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a6eb2c85-2506-4da6-9e36-a3c7aaadb8c2" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/2018.1/project-config.xsd">
+  <name>Fast Tests</name>
+  <description />
+  <settings ref="JavaScript_Template">
+    <parameters>
+      <param name="Browser" value="PhantomJS" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_6" name="restore npm packages" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="npm install" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_7" name="PhantomJS" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="npm test -- --single-run --browsers %Browser% --colors false --reporter teamcity" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <cleanup />
+  </settings>
+</build-type>
+
